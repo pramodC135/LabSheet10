@@ -29,14 +29,41 @@ $(document).on("click", "#btnSubmit", function(event)
 		return;
 	}
 
-	// IF valid
-	$("#formItem").submit();
+	// IF valid=====================
+	var type = ($("#hidItemIDSave").val() == "") ? "POST" : "PUT";
+	
+	$.ajax(
+	{
+			url : "ItemAPI",
+			type : type,
+			data : $("#formItem").serialize(),
+			dataType : "text",
+			complete : function(response, status)
+			{
+				onItemSaveComplete(response.responseText, status);
+			}
+	});
 
+});
+
+$(document).on("click", ".btnRemove", function(event)
+{
+		$.ajax(
+		{
+			url : "ItemsAPI",
+			type : "DELETE",
+			data : "itemID=" + $(this).data("itemid"),
+			dataType : "text",
+			complete : function(response, status)
+			{
+				onItemDeleteComplete(response.responeText, status);
+			}
+		});
 });
 
 $(document).on("click", ".btnUpdate", function(event)
 {
-	$("#hidItemIDSave").val($(this).closest("tr").find('#hidItemIDUpdate').val());
+	$("#hidItemIDSave").val($(this).data("itemid"));
 	$("#itemCode").val($(this).closest("tr").find('td:eq(0)').text());
 	$("#itemName").val($(this).closest("tr").find('td:eq(1)').text());
 	$("#itemPrice").val($(this).closest("tr").find('td:eq(2)').text());
@@ -80,4 +107,57 @@ function validateItemForm()
 	}
 	
 	return true;
+}
+
+function onItemSaveComplete(response, status)
+{
+	var resultSet = JSON.parse(respone);
+	
+	if (resultSet.status.trim() == "success")
+	{
+		$("#alertSuccess").text("Successfully Saved.");
+		$("#alertSuccess").show();
+		
+		$("#divItemsGrid").html(resultSet.data);
+	}else if (resultSet.status.trim() == "error")
+	{
+		$("#alertError").text(resultSet.data);
+		$("#alertError").show();
+	}
+	else if (status == "error")
+	{
+		$("#alertError").text("Error while saving.");
+		$("#alertError").show();
+	}else
+	{
+		$("#alertError").text("Unknown error while saving..");
+		$("#alertError").show();
+	}
+	$("#hidItemIDSave").val("");
+	$("#formItem")[0].reset();
+}
+
+function onItemDeleteComplete(response, status)
+{
+	if (status == "success")
+	{
+		var result = JSON.parse(response);
+		
+		if (resultSet.status.trim() == "success")
+		{
+			$("#alertSuccess").text("Successfully deleted."); 
+ 			$("#alertSuccess").show();
+ 			
+ 			$("#divItemsGrid").html(resultSet.data);
+		}
+		
+	} else if (status == "error") 
+ 	{ 
+ 			$("#alertError").text("Error while deleting."); 
+ 			$("#alertError").show(); 
+ 	} else
+ 	{ 
+ 			$("#alertError").text("Unknown error while deleting.."); 
+ 			$("#alertError").show(); 
+ 	}
 }
