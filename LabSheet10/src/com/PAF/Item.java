@@ -101,8 +101,7 @@ public class Item {
 				String itemDesc = rs.getString("itemDesc");
 				
 				// Add a row into the html table
-				output += "<tr><td><input id='hidItemIDUpdate' type='hidden' value='" + itemID + "'>"
-							+ itemCode + "</td>";
+				output += "<tr><td><input id='hidItemIDUpdate' type='hidden' value='" + itemID + "'>" + itemCode + "</td>";
 				output += "<td>" + itemName + "</td>";
 				output += "<td>" + itemPrice + "</td>";
 				output += "<td>" + itemDesc + "</td>";
@@ -157,7 +156,7 @@ public class Item {
 			preparedStmt.execute();
 			con.close();
 			
-			String newItems =readItems();
+			String newItems = readItems();
 			output = "{\"status\":\"success\", \"data\":\"" + newItems + "\"}";
 			
 		}

@@ -28,7 +28,7 @@
 									<br>
 									<div id="alertSuccess" class="alert alert-success"></div>
 									<div id="alertError" class="alert alert-danger"></div>
-									<input name="btnSubmit" id="btnSubmit" type="button" value="Save" class="btn btn-primary">
+									<input name="btnSave" id="btnSave" type="button" value="Save" class="btn btn-primary">
 									<input type="hidden" id="hidItemIDSave" name="hidItemIDSave" value="">
 								</form>
 								
