@@ -56,11 +56,12 @@ public class Item {
 			preparedStmt.execute();
 			con.close();
 			
-			output = "Inserted Successfully";
+			String newItems =readItems();
+			output = "{\"status\":\"success\", \"data\":\"" + newItems + "\"}";
 		}
 		catch(Exception e)
 		{
-			output = "Error while inserting the item.";
+			output = "{\"status\":\"error\", \"data\": \"Error while inserting the item.\"}";
 			System.err.println(e.getMessage());
 		}
 		
@@ -156,12 +157,13 @@ public class Item {
 			preparedStmt.execute();
 			con.close();
 			
-			output = "Updated successfully ";
+			String newItems =readItems();
+			output = "{\"status\":\"success\", \"data\":\"" + newItems + "\"}";
 			
 		}
 		catch (Exception e)
 		{
-			output = "Error while updating the item.";
+			output = "{\"status\":\"error\", \"data\": \"Error while Updating the item.\"}";
 			System.err.println(e.getMessage());
 		}
 		
@@ -193,11 +195,12 @@ public class Item {
 			preparedStmt.execute();
 			con.close();
 			
-			output = "Delete Successfully";	
+			String newItems =readItems();
+			output = "{\"status\":\"success\", \"data\":\"" + newItems + "\"}";
 		}
 		catch (Exception e)
 		{
-			output = "Error while deleting the item.";
+			output = "{\"status\":\"error\", \"data\": \"Error while Deleting the item.\"}";
 			System.err.println(e.getMessage());
 		}
 	
