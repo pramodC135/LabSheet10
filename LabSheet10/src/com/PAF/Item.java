@@ -107,12 +107,10 @@ public class Item {
 				output += "<td>" + itemDesc + "</td>";
 				
 				// Buttons
-				output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td>"
-						+ "<td><form method='post' action='items.jsp'>"
-						+"<input name=''btnRemove' "
-						+ "type='submit' value='Remove' class='btn btn-danger'>"
-						+"<input name='hidItemIDDelete' type= 'hidden' "
-						+ "value='" + itemID +"'>" + "</form></td></tr>";
+				output += "<td><input name='btnUpdate' type='button' value='Update' "
+						+ "class='btnUpdate btn btn-secondary' data-itemid='" + itemID + "'></td>"
+						+ "<td><input name='btnRemove' type='button' value='Remove' "
+						+ "class='btnRemove btn btn-danger' data-itemid='" + itemID + "'></td></tr>";
 			}
 			
 			con.close();
